@@ -35,6 +35,7 @@ jobs:
         # but will cause the cache entry to grow without bound over time.
         # See https://pants.readme.io/docs/using-pants-in-ci for tips on how to periodically clean it up.
         # Alternatively you change gha-cache-key to ignore old caches.
+        pants-ci-config: pants.toml
 
     - name: Setup Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1

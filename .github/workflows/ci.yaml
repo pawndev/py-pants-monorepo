@@ -47,7 +47,7 @@ jobs:
       run: ./pants tailor --check update-build-files --check
     - name: Lint and typecheck
       run: | 
-        ./pants --changed-dependees=transitive lint check ::
+        ./pants --changed-since=origin/$GITHUB_BASE_REF lint check ::
     - name: Test
       run: |
         ./pants --changed-since=origin/$GITHUB_BASE_REF --changed-dependees=transitive test

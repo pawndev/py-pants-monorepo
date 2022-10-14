@@ -1,0 +1,21 @@
+[GLOBAL]
+pants_version = "2.13.0"
+
+# All packages required for this monorepo
+# awslambda for lambda bundling
+# python, because, well, we're writing python here, right ?
+# black, a python formatter
+# docformatter, a python docstring formatter
+# pylint, a linter (you're welcom)
+# mypy, a typing checker
+backend_packages = [
+  "pants.backend.awslambda.python",
+  "pants.backend.python",
+  "pants.backend.python.lint.black",
+  "pants.backend.python.lint.docformatter",
+  "pants.backend.python.lint.pylint",
+  "pants.backend.python.typecheck.mypy"
+]
+
+[python]
+interpreter_constraints = [">= 3.8"]

@@ -1,0 +1,8 @@
+# Pants workspace files
+/.pants.*
+/dist/
+/.pids
+# jetbrains
+.idea/
+# apple
+**/*/.DS_STORE

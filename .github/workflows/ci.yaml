@@ -14,6 +14,8 @@ jobs:
         python-version: [3.9]
     steps:
     - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
     - uses: pantsbuild/actions/init-pants@main
       # This action bootstraps pants and manages 2-3 GHA caches.
       # See: github.com/pantsbuild/actions/tree/init-pants/
@@ -45,10 +47,14 @@ jobs:
       run: ./pants tailor --check update-build-files --check
     - name: Lint and typecheck
       run: | 
-        ./pants lint check ::
+        ./pants --changed-dependees=transitive lint check ::
+    - name: echo some vars
+      run: |
+        echo $GITHUB_HEAD_REF
+        echo $GITHUB_BASE_REF
     - name: Test
       run: |
-        ./pants test ::
+        ./pants --changed-since=origin/main --changed-dependees=transitive test ::
     - name: Package / Run
       run: |
         # We also smoke test that our release process will work by running `package`.

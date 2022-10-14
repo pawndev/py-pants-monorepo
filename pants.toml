@@ -19,3 +19,8 @@ backend_packages = [
 
 [python]
 interpreter_constraints = [">= 3.8"]
+
+
+[source]
+# The Python source root is the repo root. See https://www.pantsbuild.org/docs/source-roots.
+root_patterns = ["src"]

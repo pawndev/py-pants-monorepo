@@ -48,13 +48,9 @@ jobs:
     - name: Lint and typecheck
       run: | 
         ./pants --changed-dependees=transitive lint check ::
-    - name: echo some vars
-      run: |
-        echo $GITHUB_HEAD_REF
-        echo $GITHUB_BASE_REF
     - name: Test
       run: |
-        ./pants --changed-since=origin/main --changed-dependees=transitive test ::
+        ./pants --changed-since=origin/$GITHUB_BASE_REF --changed-dependees=transitive test
     - name: Package / Run
       run: |
         # We also smoke test that our release process will work by running `package`.

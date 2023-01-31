@@ -14,6 +14,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Git config
+        run: |
+          git config --global pull.rebase true
+          git config --global rebase.autostash true
+          git config --global user.email "github-bot@pawndev.tv"
+          git config --global user.name "Github Bot"
       - name: Get base branch
         id: get_base_branch
         run: echo "GIT_BASE_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT

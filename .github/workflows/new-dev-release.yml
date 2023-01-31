@@ -1,0 +1,36 @@
+name: Create New Dev Release Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        type: string
+        description: The version to create
+        required: true
+
+jobs:
+  create_release_branch:
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get base branch
+        id: get_base_branch
+        run: echo "GIT_BASE_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
+      - name: Create release branch
+        run: git checkout -b release-${{ github.event.inputs.version }} && git commit --allow-empty -m "Release ${{ github.event.inputs.version }}" && git push origin release-${{ github.event.inputs.version }}
+      - name: Open the pull request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          branch: release-${{ github.event.inputs.version }}
+          base: ${{ steps.get_base_branch.outputs.GIT_BASE_BRANCH }}
+      - name: Open a new dev release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          name: ${{ github.event.inputs.version }}-dev
+          tag_name: ${{ github.event.inputs.version }}-dev
+          target_commitish: release-${{ github.event.inputs.version }}
+          draft: true

@@ -24,7 +24,10 @@ jobs:
         id: get_base_branch
         run: echo "GIT_BASE_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
       - name: Create release branch
-        run: git checkout -b release-${{ github.event.inputs.version }} && git commit --allow-empty -m "Release ${{ github.event.inputs.version }}" && git push origin release-${{ github.event.inputs.version }}
+        run: |
+          git checkout -b release-${{ github.event.inputs.version }}
+          git commit --allow-empty -m "Release ${{ github.event.inputs.version }}"
+          git push -f origin release-${{ github.event.inputs.version }}
       - name: Open the pull request
         uses: peter-evans/create-pull-request@v4
         with:

@@ -42,6 +42,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           branch: release-${{ github.event.inputs.version }}
           base: ${{ steps.get_base_branch.outputs.GIT_BASE_BRANCH }}
+          title: Release ${{ github.event.inputs.version }}
       - name: Open a new dev release
         uses: softprops/action-gh-release@v1
         env:

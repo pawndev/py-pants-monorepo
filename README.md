@@ -63,3 +63,4 @@ can help you with some basics commands.
 Pants getting started: https://www.pantsbuild.org/docs/initial-configuration
 AWS lambda with pants: https://www.pantsbuild.org/docs/awslambda-python
 Pants backends: https://www.pantsbuild.org/docs/enabling-backends
+Pants project introspection: https://www.pantsbuild.org/v2.6/docs/project-introspection

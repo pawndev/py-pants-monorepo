@@ -1,5 +1,7 @@
 [GLOBAL]
 pants_version = "2.13.0"
+dynamic_ui = true
+colors = true
 
 # All packages required for this monorepo
 # awslambda for lambda bundling
@@ -19,3 +21,8 @@ backend_packages = [
 
 [python]
 interpreter_constraints = [">= 3.8"]
+
+
+[source]
+# The Python source root is the repo root. See https://www.pantsbuild.org/docs/source-roots.
+root_patterns = ["src"]
